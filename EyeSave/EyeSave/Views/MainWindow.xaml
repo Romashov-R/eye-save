@@ -26,6 +26,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
@@ -67,8 +68,7 @@
                 Margin="8"
                 VerticalContentAlignment="Center"
                 ItemsSource="{Binding SortList}"
-                SelectedItem="{Binding SelectedSort, UpdateSourceTrigger=PropertyChanged}"
-                SelectedIndex="0"/>
+                SelectedItem="{Binding SelectedSort, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Filtering -->
             <ComboBox
@@ -76,8 +76,7 @@
                 Margin="8"
                 VerticalContentAlignment="Center"
                 ItemsSource="{Binding FilterList}"
-                SelectedItem="{Binding SelectedFilter, UpdateSourceTrigger=PropertyChanged}"
-                SelectedIndex="0"/>
+                SelectedItem="{Binding SelectedFilter, UpdateSourceTrigger=PropertyChanged}"/>
 
         </Grid>
 
@@ -176,25 +175,79 @@
 
         </Grid>
 
-        <!-- Footer -->
+        <!-- Buttons -->
         <Grid
-            Grid.Row="2"
-            Background="{StaticResource ColorSecondary}">
-
+            Grid.Row="2">
+            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
+            
             <Button
                 Grid.Column="0"
                 Margin="8"
                 Background="{StaticResource ColorPrimary}"
                 Content="Добавить агента"
-                BorderBrush="{StaticResource ColorAccent}"/>
+                BorderBrush="{StaticResource ColorAccent}" />
             
-
+            <Button
+                Grid.Column="1"
+                Margin="8"
+                Background="{StaticResource ColorPrimary}"
+                Content="Изменить приоритет"
+                BorderBrush="{StaticResource ColorAccent}" />
+        </Grid>
+        
+        <!-- Footer -->
+        <Grid
+            Grid.Row="3"
+            Background="{StaticResource ColorSecondary}">
+            
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center">
+                
+                <Button 
+                    x:Name="btnPreviousPage"
+                    Content="&lt;"
+                    Padding="8"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="btnPreviousPage_Click"/>
+                
+                <ListView
+                    ItemsSource="{Binding Pages, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedPage, UpdateSourceTrigger=PropertyChanged}"
+                    Background="Transparent"
+                    BorderThickness="0">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                Name="tbNum"
+                                Padding="8"
+                                Text="{Binding pageNum}" />
+                            <DataTemplate.Triggers></DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <Button
+                    x:Name="btnNextPage"
+                    Content="&gt;"
+                    Padding="8"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="btnNextPage_Click"/>
+                
+            </StackPanel>
+            
         </Grid>
 
     </Grid>

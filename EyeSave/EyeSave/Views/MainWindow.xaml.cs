@@ -21,5 +21,25 @@ namespace EyeSave.Views
             if(_viewModel.SelectedAgent != null)
                 new AgentWindow(_viewModel.SelectedAgent.Id).ShowDialog();            
         }
+
+        private void btnPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.SelectedPage.pageNum == 1)
+                return;
+
+            var currentPageNum = _viewModel.SelectedPage.pageNum;
+
+            _viewModel.SelectedPage = _viewModel.Pages[currentPageNum - 2];
+        }
+
+        private void btnNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.SelectedPage.pageNum == _viewModel.Pages.Count)
+                return;
+
+            var currentPageNum = _viewModel.SelectedPage.pageNum;
+
+            _viewModel.SelectedPage = _viewModel.Pages[currentPageNum];
+        }
     }
 }
